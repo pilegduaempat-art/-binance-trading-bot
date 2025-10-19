@@ -1,0 +1,261 @@
+# Contributing to Binance Trading Bot
+
+Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
+
+## 🤝 How to Contribute
+
+### Reporting Bugs
+
+If you find a bug, please create an issue with:
+- Clear description of the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if applicable
+- Environment details (Python version, OS, etc.)
+
+### Suggesting Features
+
+Feature requests are welcome! Please:
+- Check if the feature has already been requested
+- Provide clear use case and benefits
+- Include mockups or examples if possible
+
+### Code Contributions
+
+1. **Fork the Repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/binance-trading-bot.git
+   cd binance-trading-bot
+   ```
+
+2. **Create a Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make Changes**
+   - Follow the existing code style
+   - Add comments for complex logic
+   - Update documentation if needed
+
+4. **Test Your Changes**
+   ```bash
+   # Run locally
+   streamlit run app.py
+   
+   # Test all features
+   # - API connection
+   # - Indicator calculations
+   # - Signal generation
+   # - ML training
+   # - Backtesting
+   ```
+
+5. **Commit Changes**
+   ```bash
+   git add .
+   git commit -m "Add: brief description of changes"
+   ```
+
+   Commit message format:
+   - `Add:` for new features
+   - `Fix:` for bug fixes
+   - `Update:` for updates to existing features
+   - `Refactor:` for code refactoring
+   - `Docs:` for documentation changes
+
+6. **Push to Your Fork**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+7. **Create Pull Request**
+   - Go to the original repository
+   - Click "New Pull Request"
+   - Select your branch
+   - Provide clear description of changes
+   - Link related issues if applicable
+
+## 📋 Code Style Guidelines
+
+### Python Code
+- Follow PEP 8 style guide
+- Use meaningful variable names
+- Add docstrings for functions
+- Keep functions focused and small
+- Use type hints where appropriate
+
+Example:
+```python
+def calculate_position_size(balance: float, risk_pct: float, 
+                           entry: float, sl: float) -> float:
+    """
+    Calculate position size based on risk parameters.
+    
+    Args:
+        balance: Account balance
+        risk_pct: Risk percentage per trade
+        entry: Entry price
+        sl: Stop loss price
+    
+    Returns:
+        Position size in base currency
+    """
+    risk_amount = balance * (risk_pct / 100)
+    risk_distance = abs(entry - sl)
+    return risk_amount / risk_distance if risk_distance > 0 else 0
+```
+
+### Module Organization
+- Keep related functions in the same module
+- Use clear file names
+- Avoid circular imports
+- Keep modules focused on single responsibility
+
+### Documentation
+- Update README.md if adding new features
+- Add inline comments for complex logic
+- Update docstrings when modifying functions
+
+## 🧪 Testing Guidelines
+
+Before submitting a PR, ensure:
+- [ ] Code runs without errors
+- [ ] All existing features still work
+- [ ] New features are tested manually
+- [ ] No security vulnerabilities introduced
+- [ ] API keys are not hardcoded
+
+## 🎯 Areas for Contribution
+
+We welcome contributions in these areas:
+
+### High Priority
+- **Additional Strategies**: New trading strategies or indicators
+- **Performance Optimization**: Improve speed and efficiency
+- **Error Handling**: Better error messages and recovery
+- **Testing**: Unit tests and integration tests
+- **Documentation**: Improve guides and examples
+
+### Medium Priority
+- **UI/UX Improvements**: Better charts, layouts, and interactions
+- **Additional Exchanges**: Support for other exchanges
+- **Mobile Optimization**: Improve mobile experience
+- **Notifications**: New notification channels
+- **Backtesting**: Enhanced backtesting features
+
+### Low Priority
+- **Themes**: Custom color themes
+- **Translations**: Multi-language support
+- **Export Features**: Export data to CSV/Excel
+- **Advanced Analytics**: More analysis tools
+
+## 🛡️ Security Guidelines
+
+**NEVER commit:**
+- API keys or secrets
+- Private credentials
+- Personal information
+- Real trading data
+
+**Always:**
+- Use environment variables for secrets
+- Add sensitive files to .gitignore
+- Test on testnet first
+- Review code for security issues
+
+## 📝 Documentation Standards
+
+### Code Comments
+```python
+# Good: Explains WHY
+# Calculate position size to risk exactly 2% of balance
+position_size = balance * 0.02 / risk_distance
+
+# Bad: Explains WHAT (obvious from code)
+# Multiply balance by 0.02 and divide by risk distance
+position_size = balance * 0.02 / risk_distance
+```
+
+### Function Docstrings
+Include:
+- Brief description
+- Parameters with types
+- Return value with type
+- Exceptions if any
+- Usage example if complex
+
+### Module Docstrings
+Include:
+- Purpose of the module
+- Main functions/classes
+- Dependencies
+- Usage examples
+
+## 🔄 Review Process
+
+1. **Automated Checks**: PR must pass any automated checks
+2. **Code Review**: Maintainers will review your code
+3. **Feedback**: Address any requested changes
+4. **Merge**: Once approved, PR will be merged
+
+## 🎓 Learning Resources
+
+### Technical Analysis
+- [Investopedia TA Guide](https://www.investopedia.com/technical-analysis-4689657)
+- [TradingView Educational Ideas](https://www.tradingview.com/ideas/)
+
+### Python & Streamlit
+- [Python Official Docs](https://docs.python.org/)
+- [Streamlit Documentation](https://docs.streamlit.io)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
+
+### Trading APIs
+- [CCXT Documentation](https://docs.ccxt.com)
+- [Binance API Docs](https://binance-docs.github.io/apidocs/futures/en/)
+
+## 💬 Communication
+
+- **GitHub Issues**: Bug reports and feature requests
+- **Pull Requests**: Code contributions
+- **Discussions**: General questions and ideas
+
+## 🏆 Recognition
+
+Contributors will be:
+- Listed in README.md
+- Credited in release notes
+- Mentioned in documentation
+
+## ⚖️ Code of Conduct
+
+### Our Pledge
+We are committed to providing a welcoming and inspiring community for all.
+
+### Expected Behavior
+- Be respectful and inclusive
+- Accept constructive criticism
+- Focus on what's best for the community
+- Show empathy towards others
+
+### Unacceptable Behavior
+- Harassment or discrimination
+- Trolling or insulting comments
+- Publishing others' private information
+- Other unprofessional conduct
+
+## 📞 Questions?
+
+If you have questions about contributing:
+1. Check existing issues and discussions
+2. Read the documentation
+3. Create a new discussion thread
+4. Ask in your PR if specific to your contribution
+
+## 🙏 Thank You!
+
+Every contribution, no matter how small, helps make this project better. We appreciate your time and effort!
+
+---
+
+**Happy Contributing! 🚀**

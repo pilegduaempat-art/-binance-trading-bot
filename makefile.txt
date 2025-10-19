@@ -1,0 +1,116 @@
+.PHONY: help install run test clean docker-build docker-run deploy
+
+# Default target
+help:
+	@echo "Binance Trading Bot - Available Commands"
+	@echo ""
+	@echo "  make install       - Install dependencies"
+	@echo "  make run          - Run the application"
+	@echo "  make test         - Run tests"
+	@echo "  make clean        - Clean cache and temp files"
+	@echo "  make docker-build - Build Docker image"
+	@echo "  make docker-run   - Run Docker container"
+	@echo "  make deploy       - Deploy to Streamlit Cloud"
+	@echo ""
+
+# Install dependencies
+install:
+	@echo "📦 Installing dependencies..."
+	pip install --upgrade pip
+	pip install -r requirements.txt
+	@echo "✅ Dependencies installed"
+
+# Run the application
+run:
+	@echo "🚀 Starting Binance Trading Bot..."
+	streamlit run app.py
+
+# Run tests (placeholder - add tests later)
+test:
+	@echo "🧪 Running tests..."
+	@echo "⚠️  No tests configured yet"
+
+# Clean cache and temporary files
+clean:
+	@echo "🧹 Cleaning cache and temporary files..."
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete 2>/dev/null || true
+	find . -type f -name "*.pyo" -delete 2>/dev/null || true
+	find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null || true
+	rm -rf .streamlit/cache 2>/dev/null || true
+	rm -rf build dist 2>/dev/null || true
+	@echo "✅ Cleaned"
+
+# Build Docker image
+docker-build:
+	@echo "🐳 Building Docker image..."
+	docker build -t binance-trading-bot:latest .
+	@echo "✅ Docker image built"
+
+# Run Docker container
+docker-run:
+	@echo "🐳 Running Docker container..."
+	docker-compose up -d
+	@echo "✅ Container started at http://localhost:8501"
+
+# Stop Docker container
+docker-stop:
+	@echo "🛑 Stopping Docker container..."
+	docker-compose down
+	@echo "✅ Container stopped"
+
+# Deploy to Streamlit Cloud
+deploy:
+	@echo "☁️  Deploying to Streamlit Cloud..."
+	@echo "Please ensure you have:"
+	@echo "  1. Pushed code to GitHub"
+	@echo "  2. Connected repository to Streamlit Cloud"
+	@echo "  3. Set main file to app.py"
+	@echo ""
+	@echo "Visit: https://share.streamlit.io"
+
+# Create virtual environment
+venv:
+	@echo "📦 Creating virtual environment..."
+	python3 -m venv venv
+	@echo "✅ Virtual environment created"
+	@echo "Activate with: source venv/bin/activate (Linux/Mac) or venv\\Scripts\\activate (Windows)"
+
+# Format code (requires black)
+format:
+	@echo "🎨 Formatting code..."
+	pip install black
+	black *.py tabs/*.py
+	@echo "✅ Code formatted"
+
+# Lint code (requires pylint)
+lint:
+	@echo "🔍 Linting code..."
+	pip install pylint
+	pylint *.py tabs/*.py
+	@echo "✅ Lint complete"
+
+# Check for security issues (requires bandit)
+security:
+	@echo "🔒 Checking for security issues..."
+	pip install bandit
+	bandit -r . -f json -o security-report.json
+	@echo "✅ Security check complete (see security-report.json)"
+
+# Update dependencies
+update:
+	@echo "🔄 Updating dependencies..."
+	pip install --upgrade pip
+	pip install --upgrade -r requirements.txt
+	@echo "✅ Dependencies updated"
+
+# Create requirements.txt from current environment
+freeze:
+	@echo "❄️  Freezing dependencies..."
+	pip freeze > requirements.txt
+	@echo "✅ requirements.txt updated"
+
+# Show package versions
+versions:
+	@echo "📋 Installed package versions:"
+	@pip list | grep -E "streamlit|ccxt|pandas|numpy|plotly|ta|scikit-learn"
